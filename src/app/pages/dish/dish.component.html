@@ -1,0 +1,14 @@
+<div class="container">
+    <input type="text" [(ngModel)]="name" placeholder="Название">
+    <input type="text" [(ngModel)]="place" placeholder="Место">
+    <input type="number" min="1" max="10" [(ngModel)]="rating" placeholder="Рейтинг" (input)="inputValue()">
+    <button class="btn" *ngIf="!id" (click)="createDish()">Добавить блюдо</button>
+    <button class="btn" *ngIf="id" (click)="updateDish()">Изменить блюдо</button>
+    <p class="error">{{ errorMessage }}</p>
+
+    <ng-container *ngFor="let audio of audioList">
+        <audio #audioRef [id]="audio.id" [src]="audio.src"></audio>
+    </ng-container>
+</div>
+
+<button class="back" routerLink="">Назад</button>

@@ -1,0 +1,47 @@
+.container {
+    background: #fae0e4;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 50px;
+}
+
+input {
+    padding: 5px;
+    display: block;
+    width: 200px;
+    border: 1px solid #FF477E;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.btn {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #FF477E;
+    border-radius: 5px;
+    background: #FF477E;
+    box-sizing: border-box;
+    color: white;
+}
+
+.error {
+    font-size: 14px;
+    color: red;
+}
+
+.back {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+
+    padding: 5px;
+    border: 1px solid #FF477E;
+    border-radius: 5px;
+    background: #FF477E;
+    box-sizing: border-box;
+    color: white;
+}
