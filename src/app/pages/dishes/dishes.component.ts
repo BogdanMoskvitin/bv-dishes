@@ -21,11 +21,4 @@ export class DishesComponent implements OnInit {
       this.dishes = data;
     });
   }
-
-  deleteDish(id: number) {
-    this.dishesService.deleteDish(id).subscribe(() => {
-      console.log('Блюдо удалено');
-      this.dishes = this.dishes.filter(dish => dish.id !== id);
-    })
-  }
 }

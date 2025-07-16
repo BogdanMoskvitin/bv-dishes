@@ -9,13 +9,15 @@ import { DishesComponent } from './pages/dishes/dishes.component';
 import { DishComponent } from './pages/dish/dish.component';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth.interceptor';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     DishesComponent,
-    DishComponent
+    DishComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

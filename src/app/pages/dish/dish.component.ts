@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular
 import { ActivatedRoute, Router } from '@angular/router';
 import { DishRequest, DishResponse } from 'src/app/models/dish.interface';
 import { DishesService } from 'src/app/services/dishes.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dish',
@@ -25,10 +26,12 @@ export class DishComponent implements OnInit {
   ]
 
   id: string | null = null;
+  user: string | null = null;
 
   name: string = '';
   place: string = '';
-  rating: number = 5;
+  b_rating: number | null = null;
+  v_rating: number | null = null;
 
   isPlanktonMem: boolean = false;
 
@@ -38,29 +41,34 @@ export class DishComponent implements OnInit {
     private dishesService: DishesService,
     private route: ActivatedRoute,
     private router: Router,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.user = this.userService.getUserName();
 
     this.setValue();
   }
 
   setValue() {
-    if (this.id) {
+    if (this.id) {    
       this.dishesService.getDish(+this.id).subscribe((res: DishResponse) => {
         this.name = res.name;
         this.place = res.place;
-        this.rating = res.b_rating;
+        this.b_rating = res.b_rating;
+        this.v_rating = res.v_rating;
       })
     }
   }
 
   createDish() {
+    let rating = this.user === 'Богдан' ? this.b_rating : this.v_rating;
+    if (!rating || !this.name.length) return;
     const dish: DishRequest = {
       name: this.name,
       place: this.place,
-      rating: this.rating,
+      rating: rating,
     };
     this.dishesService.createDish(dish).subscribe(
       () => {
@@ -72,31 +80,45 @@ export class DishComponent implements OnInit {
   }
 
   updateDish() {
-    if (this.id) {
-      const dish: DishRequest = {
-        name: this.name,
-        place: this.place,
-        rating: this.rating,
-      };
-      this.dishesService.updateDish(+this.id, dish).subscribe(
-        () => {
-          this.router.navigate(['./dishes']);
-        }, (error) => {
-          this.errorMessage = error.error.error;
-        }
-      )
-    }
+    let rating = this.user === 'Богдан' ? this.b_rating : this.v_rating;
+    if (!this.id || !rating || !this.name.length) return;
+    const dish: DishRequest = {
+      name: this.name,
+      place: this.place,
+      rating: rating,
+    };
+    this.dishesService.updateDish(+this.id, dish).subscribe(
+      () => {
+        this.router.navigate(['./dishes']);
+      }, (error) => {
+        this.errorMessage = error.error.error;
+      }
+    )
   }
 
-  inputValue() {
+  selectRating(index: number) {
+    let rating: number | null = null;
+    if (this.user === 'Богдан') {
+      this.b_rating = index;
+      rating = this.b_rating;
+    } else {
+      this.v_rating = index;
+      rating = this.v_rating;
+    }
     this.audioElements.forEach(audioElement => {
       audioElement.nativeElement.currentTime = 0;
       audioElement.nativeElement.pause();
     })
     this.audioElements.forEach(audioElement => {
-      if (+audioElement.nativeElement.id === this.rating) {
+      if (+audioElement.nativeElement.id === rating) {
         audioElement.nativeElement.play();
       }
     })
+  }
+
+  deleteDish() {
+    if (this.id) {
+      this.dishesService.deleteDish(+this.id).subscribe()
+    }
   }
 }

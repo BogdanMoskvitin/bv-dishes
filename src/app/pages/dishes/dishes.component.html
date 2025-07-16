@@ -1,28 +1,21 @@
 <div class="container">
     <button class="add-btn" [routerLink]="['/dish']">Добавить блюдо</button>
 
-    <table>
-        <tr>
-            <th>Название</th>
-            <th>Рейтинг</th>
-            <th></th>
-        </tr>
-        <tr *ngFor="let dish of dishes">
-            <td><a [routerLink]="['/dish', dish.id]">{{ dish.name }}</a></td>
-            <td *ngIf="dish.b_rating && dish.v_rating && dish.b_rating !== dish.v_rating" class="rating rating__both rating__both_different">
+    <div class="dish" *ngFor="let dish of dishes" [routerLink]="['/dish', dish.id]">
+        <div class="dish__name">{{ dish.name | truncate:20 }}</div>
+        <div class="dish__flex">
+            <div class="dish__place">{{ dish.place }}</div>
+            <div *ngIf="dish.b_rating && dish.v_rating && dish.b_rating !== dish.v_rating" class="dish__rating dish__rating_different"><span>{{ dish.b_rating }}</span>
+                <span>{{ dish.v_rating }}</span></div>
+            <div *ngIf="dish.b_rating && dish.v_rating && dish.b_rating === dish.v_rating" class="dish__rating dish__rating_same">
                 <span>{{ dish.b_rating }}</span>
+            </div>
+            <div *ngIf="dish.b_rating && !dish.v_rating" class="dish__rating dish__rating_b">
+                <span>{{ dish.b_rating }}</span>
+            </div>
+            <div *ngIf="!dish.b_rating && dish.v_rating" class="dish__rating dish__rating_v">
                 <span>{{ dish.v_rating }}</span>
-            </td>
-            <td *ngIf="dish.b_rating && dish.v_rating && dish.b_rating === dish.v_rating" class="rating rating__both rating__both_same">
-                <span>{{ dish.b_rating }}</span>
-            </td>
-            <td *ngIf="dish.b_rating && !dish.v_rating" class="rating rating__one_b">
-                <span>{{ dish.b_rating }}</span>
-            </td>
-            <td *ngIf="!dish.b_rating && dish.v_rating" class="rating rating__one_v">
-                <span>{{ dish.v_rating }}</span>
-            </td>
-            <td><button class="delete-btn" (click)="deleteDish(dish.id)">X</button></td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </div>

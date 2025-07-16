@@ -4,28 +4,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-    padding: 50px;
+    gap: 10px;
+    padding: 70px 20px;
 }
 
 input {
-    padding: 5px;
+    padding: 10px;
     display: block;
-    width: 200px;
+    width: 100%;
     border: 1px solid #FF477E;
     border-radius: 5px;
     box-sizing: border-box;
     text-align: center;
+    font-size: 16px;
 }
 
 .btn {
-    padding: 5px;
-    width: 200px;
+    padding: 10px;
+    width: 100%;
     border: 1px solid #FF477E;
     border-radius: 5px;
     background: #FF477E;
     box-sizing: border-box;
     color: white;
+    font-size: 16px;
 }
 
 .error {
@@ -44,4 +46,40 @@ input {
     background: #FF477E;
     box-sizing: border-box;
     color: white;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2px;
+}
+
+.rating {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    font-size: 16px;
+    background: none;
+    border: 1px solid #FF477E;
+    border-radius: 5px;
+}
+
+.selected {
+    background: #FF477E;
+    color: #fff;
+
+    &_b {
+        background: #a2d2ff;
+        color: #fff;
+    }
+
+    &_v {
+        background: #FF477E;
+        color: #fff;
+    }
+
+    &_bv {
+        background: linear-gradient(135deg, #a2d2ff, #FF85A1);
+        color: #fff;
+    }
 }
