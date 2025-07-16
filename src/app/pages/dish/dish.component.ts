@@ -12,16 +12,16 @@ export class DishComponent implements OnInit {
   @ViewChildren('audioRef') audioElements!: QueryList<ElementRef<HTMLAudioElement>>;
 
   audioList = [
-    {id: 1, src: "/assets/sounds/1-plankton.mp3"},
-    {id: 2, src: "/assets/sounds/2-banane.mp3"},
-    {id: 3, src: "/assets/sounds/3-hitler.mp3"},
-    {id: 4, src: "/assets/sounds/4-a.mp3"},
-    {id: 5, src: "/assets/sounds/5-billy.mp3"},
-    {id: 6, src: "/assets/sounds/6-angry.mp3"},
-    {id: 7, src: "/assets/sounds/7-pop.mp3"},
-    {id: 8, src: "/assets/sounds/8-kumi.mp3"},
-    {id: 9, src: "/assets/sounds/9-oiia.mp3"},
-    {id: 10, src: "/assets/sounds/10-happy.mp3"},
+    {id: 1, src: "assets/sounds/1-plankton.mp3"},
+    {id: 2, src: "assets/sounds/2-banane.mp3"},
+    {id: 3, src: "assets/sounds/3-hitler.mp3"},
+    {id: 4, src: "assets/sounds/4-a.mp3"},
+    {id: 5, src: "assets/sounds/5-billy.mp3"},
+    {id: 6, src: "assets/sounds/6-angry.mp3"},
+    {id: 7, src: "assets/sounds/7-pop.mp3"},
+    {id: 8, src: "assets/sounds/8-kumi.mp3"},
+    {id: 9, src: "assets/sounds/9-oiia.mp3"},
+    {id: 10, src: "assets/sounds/10-happy.mp3"},
   ]
 
   id: string | null = null;
