@@ -24,18 +24,15 @@ export class DishComponent implements OnInit {
     {id: 9, src: "assets/sounds/9-oiia.mp3"},
     {id: 10, src: "assets/sounds/10-happy.mp3"},
   ]
-
   id: string | null = null;
   user: string | null = null;
-
   name: string = '';
   place: string = '';
   b_rating: number | null = null;
   v_rating: number | null = null;
-
   isPlanktonMem: boolean = false;
-
   errorMessage: string = '';
+  isLoader: boolean = false;
 
   constructor(
     private dishesService: DishesService,
@@ -52,12 +49,14 @@ export class DishComponent implements OnInit {
   }
 
   setValue() {
-    if (this.id) {    
+    if (this.id) {
+      this.isLoader = true;  
       this.dishesService.getDish(+this.id).subscribe((res: DishResponse) => {
         this.name = res.name;
         this.place = res.place;
         this.b_rating = res.b_rating;
         this.v_rating = res.v_rating;
+        this.isLoader = false;
       })
     }
   }

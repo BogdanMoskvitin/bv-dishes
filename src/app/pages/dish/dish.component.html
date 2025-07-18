@@ -1,31 +1,37 @@
 <div class="container">
-    <input type="text" [(ngModel)]="name" placeholder="Название">
-    
-    <input type="text" [(ngModel)]="place" placeholder="Место">
+    <ng-container *ngIf="!isLoader || !id">
+        <input type="text" [(ngModel)]="name" placeholder="Название">
+        
+        <input type="text" [(ngModel)]="place" placeholder="Место">
 
-    <div class="flex">
-        <button 
-            class="rating" 
-            *ngFor="let btn of [].constructor(10); let i = index"
-            (click)="selectRating(i + 1)"
-            [class.selected_bv]="b_rating === v_rating && b_rating === i + 1"
-            [class.selected_b]="b_rating !== v_rating && b_rating === i + 1"
-            [class.selected_v]="b_rating !== v_rating && v_rating === i + 1">
-            {{i + 1}}
-        </button>
-    </div>
+        <div class="flex">
+            <button 
+                class="rating" 
+                *ngFor="let btn of [].constructor(10); let i = index"
+                (click)="selectRating(i + 1)"
+                [class.selected_bv]="b_rating === v_rating && b_rating === i + 1"
+                [class.selected_b]="b_rating !== v_rating && b_rating === i + 1"
+                [class.selected_v]="b_rating !== v_rating && v_rating === i + 1">
+                {{i + 1}}
+            </button>
+        </div>
+        
+        <button class="btn" *ngIf="!id" (click)="createDish()">Добавить блюдо</button>
+        
+        <button class="btn" *ngIf="id" (click)="updateDish()">Изменить блюдо</button>
+        
+        <button class="btn" *ngIf="id" (click)="deleteDish()">Удалить блюдо</button>
     
-    <button class="btn" *ngIf="!id" (click)="createDish()">Добавить блюдо</button>
-    
-    <button class="btn" *ngIf="id" (click)="updateDish()">Изменить блюдо</button>
-    
-    <button class="btn" *ngIf="id" (click)="deleteDish()">Удалить блюдо</button>
-   
-    <p class="error">{{ errorMessage }}</p>
+        <p class="error">{{ errorMessage }}</p>
 
-    <ng-container *ngFor="let audio of audioList">
-        <audio #audioRef [id]="audio.id" [src]="audio.src"></audio>
+        <ng-container *ngFor="let audio of audioList">
+            <audio #audioRef [id]="audio.id" [src]="audio.src"></audio>
+        </ng-container>
     </ng-container>
+
+    <div class="loader-container" *ngIf="isLoader">
+        <mat-spinner diameter="40" color="warn"></mat-spinner>
+    </div>
 </div>
 
 <button class="back" routerLink="">Назад</button>

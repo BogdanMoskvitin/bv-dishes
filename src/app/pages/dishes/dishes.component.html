@@ -1,8 +1,10 @@
 <div class="container">
-    <button class="add-btn" [routerLink]="['/dish']">Добавить блюдо</button>
+    <button [routerLink]="['/dish']">Добавить блюдо</button>
 
-    <div class="dish" *ngFor="let dish of dishes" [routerLink]="['/dish', dish.id]">
-        <div class="dish__name">{{ dish.name | truncate:20 }}</div>
+    <input type="text" (input)="filterList($event)" placeholder="Поиск...">
+
+    <div class="dish" *ngFor="let dish of filteredDishes" [routerLink]="['/dish', dish.id]">
+        <div class="dish__name">{{ dish.name | truncate:25 }}</div>
         <div class="dish__flex">
             <div class="dish__place">{{ dish.place }}</div>
             <div *ngIf="dish.b_rating && dish.v_rating && dish.b_rating !== dish.v_rating" class="dish__rating dish__rating_different"><span>{{ dish.b_rating }}</span>
@@ -17,5 +19,9 @@
                 <span>{{ dish.v_rating }}</span>
             </div>
         </div>
+    </div>
+
+    <div class="loader-container" *ngIf="isLoader">
+        <mat-spinner diameter="40" color="warn"></mat-spinner>
     </div>
 </div>

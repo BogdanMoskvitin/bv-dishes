@@ -10,6 +10,7 @@ import { DishComponent } from './pages/dish/dish.component';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth.interceptor';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
