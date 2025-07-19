@@ -1,92 +1,145 @@
-.container {
+.dishes {
     background: #fae0e4;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-}
 
-button {
-    padding: 10px;
-    width: 100%;
-    border: 1px solid #FF477E;
-    border-radius: 5px;
-    background: #FF477E;
-    box-sizing: border-box;
-    color: white;
-    font-size: 16px;
-}
-
-input {
-    padding: 10px;
-    width: 100%;
-    border: 1px solid #FF477E;
-    border-radius: 5px;
-    background: #fff;
-    box-sizing: border-box;
-    font-size: 16px;
-    margin-top: 10px;
-    outline: none;
-}
-
-.dish {
-    width: 100%;
-    border: 1px solid #FF0A54;
-    border-radius: 5px;
-    margin-top: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-
-    &__name {
-        font-size: 22px;
-        font-weight: bold;
+    &__btn_add {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #FF477E;
+        border-radius: 5px;
+        background: #FF477E;
+        box-sizing: border-box;
+        color: white;
+        font-size: 16px;
     }
 
-    &__flex {
+    &__filters {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 5px;
+        margin-top: 10px;
+        width: 100%;
+        gap: 5px;
+
+        &_search {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #FF477E;
+            border-radius: 5px;
+            background: #fff;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+        }
+
+        &_sort {
+            height: 40px;
+            width: 40px;
+            border: 1px solid #FF477E;
+            border-radius: 5px;
+            background: #FF477E;
+            box-sizing: border-box;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &_option {
+                display: flex;
+                align-items: center;
+
+                &_icon-date {
+                    color: #FF477E;
+                }
+
+                &_span {
+                    color: #000;
+                    font-size: 18px;
+                }
+
+                &_icon-rating {
+                    color: #a2d2ff;
+                }
+            }
+        }
     }
 
-    &__place {
-        font-size: 18px;
-    }
-
-    &__rating {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 80px;
-        height: 30px;
+    &__dish {
+        width: 100%;
         border: 1px solid #FF0A54;
         border-radius: 5px;
-        font-size: 18px;
-        font-weight: bold;
+        margin-top: 10px;
+        padding: 10px;
+        box-sizing: border-box;
 
-        &_different {
-            background: linear-gradient(135deg, #a2d2ff, #FF85A1);
-            justify-content: space-around;
+        &_header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &_name {
+                font-size: 22px;
+                font-weight: bold;
+            }
+
+            &_icon {
+                color: #a2d2ff;
+            }
         }
 
-        &_same {
-            background: linear-gradient(135deg, #a2d2ff, #FF85A1);
-        }
+        &_body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
 
-        &_b {
-            background: #a2d2ff;
-        }
+            &_place {
+                font-size: 16px;
+                color: #FF0A54;
+            }
 
-        &_v {
-            background: #FF85A1;
+            &_date {
+                font-size: 16px;
+                margin-top: 3px;
+            }
+
+            &_rating {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 80px;
+                height: 30px;
+                border: 1px solid #FF0A54;
+                border-radius: 5px;
+                font-size: 18px;
+                font-weight: bold;
+
+                &_different {
+                    background: linear-gradient(135deg, #a2d2ff, #FF85A1);
+                    justify-content: space-around;
+                }
+
+                &_same {
+                    background: linear-gradient(135deg, #a2d2ff, #FF85A1);
+                }
+
+                &_b {
+                    background: #a2d2ff;
+                }
+
+                &_v {
+                    background: #FF85A1;
+                }
+            }
         }
     }
-}
 
-.loader-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+    &__loader {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
 }
- 

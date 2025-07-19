@@ -1,28 +1,28 @@
-<div class="container">
+<div class="dish">
     <ng-container *ngIf="!isLoader || !id">
-        <input type="text" [(ngModel)]="name" placeholder="Название">
+        <input class="dish__input" type="text" [(ngModel)]="name" placeholder="Название">
         
-        <input type="text" [(ngModel)]="place" placeholder="Место">
+        <input class="dish__input" type="text" [(ngModel)]="place" placeholder="Место">
 
-        <div class="flex">
+        <div class="dish__rating">
             <button 
-                class="rating" 
+                class="dish__rating_btn" 
                 *ngFor="let btn of [].constructor(10); let i = index"
                 (click)="selectRating(i + 1)"
-                [class.selected_bv]="b_rating === v_rating && b_rating === i + 1"
-                [class.selected_b]="b_rating !== v_rating && b_rating === i + 1"
-                [class.selected_v]="b_rating !== v_rating && v_rating === i + 1">
+                [class.dish__rating_selected_bv]="b_rating === v_rating && b_rating === i + 1"
+                [class.dish__rating_selected_b]="b_rating !== v_rating && b_rating === i + 1"
+                [class.dish__rating_selected_v]="b_rating !== v_rating && v_rating === i + 1">
                 {{i + 1}}
             </button>
         </div>
         
-        <button class="btn" *ngIf="!id" (click)="createDish()">Добавить блюдо</button>
+        <button class="dish__btn" *ngIf="!id" (click)="createDish()">Добавить блюдо</button>
         
-        <button class="btn" *ngIf="id" (click)="updateDish()">Изменить блюдо</button>
+        <button class="dish__btn" *ngIf="id" (click)="updateDish()">Изменить блюдо</button>
         
-        <button class="btn" *ngIf="id" (click)="deleteDish()">Удалить блюдо</button>
+        <button class="dish__btn" *ngIf="id" (click)="deleteDish()">Удалить блюдо</button>
     
-        <p class="error">{{ errorMessage }}</p>
+        <p class="dish__error">{{ errorMessage }}</p>
 
         <ng-container *ngFor="let audio of audioList">
             <audio #audioRef [id]="audio.id" [src]="audio.src"></audio>

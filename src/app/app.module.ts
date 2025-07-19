@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth.interceptor';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HttpClientModule,
     FormsModule,
     MatProgressSpinnerModule,
+    MatIconModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

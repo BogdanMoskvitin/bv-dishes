@@ -7,7 +7,7 @@ export interface DishRequest {
 export interface DishResponse {
   id: number;
   author: string;
-  datetime: string;
+  created_at: string;
   name: string;
   place: string;
   b_rating: number;

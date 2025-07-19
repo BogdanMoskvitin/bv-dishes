@@ -1,4 +1,4 @@
-.container {
+.auth {
     background: #fae0e4;
     height: 100vh;
     display: flex;
@@ -6,20 +6,20 @@
     align-items: center;
     gap: 5px;
     padding: 50px;
-}
 
-p {
-    font-size: 20px;
-}
+    &__title {
+        font-size: 20px;
+    }
 
-.images {
-    display: flex;
-    gap: 10px;
-}
+    &__images {
+        display: flex;
+        gap: 10px;
 
-img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
+        &_img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    }
 }

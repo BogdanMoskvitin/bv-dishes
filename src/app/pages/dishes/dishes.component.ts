@@ -14,6 +14,8 @@ export class DishesComponent implements OnInit {
   searchValue: string = '';
   private searchSubject = new Subject<string>();
   isLoader: boolean = false;
+  isSortByDateAsc: boolean = true;
+  isSortByRatingAsc: boolean = false;
 
   constructor(private dishesService: DishesService) { }
 
@@ -53,5 +55,36 @@ export class DishesComponent implements OnInit {
       dish.name.toLowerCase().includes(lowerValue) ||
       dish.place.toLowerCase().includes(lowerValue)
     );
+  }
+
+  sortByDate(): void {
+    this.filteredDishes.sort((a, b) => {
+      const dateA = new Date(a.created_at).getTime();
+      const dateB = new Date(b.created_at).getTime();
+      return this.isSortByDateAsc ? dateA - dateB : dateB - dateA;
+    });
+    this.isSortByDateAsc = !this.isSortByDateAsc;
+  }
+
+  sortByRating(): void {
+    this.filteredDishes.sort((a, b) => {
+      const getAverageRating = (dish: DishResponse): number => {
+        const ratings = [];
+        if (dish['b_rating'] != null && dish['b_rating'] !== undefined) {
+          ratings.push(dish['b_rating']);
+        }
+        if (dish['v_rating'] != null && dish['v_rating'] !== undefined) {
+          ratings.push(dish['v_rating']);
+        }
+        const sum = ratings.reduce((acc, val) => acc + val, 0);
+        return sum / ratings.length;
+      };
+
+      const avgA = getAverageRating(a);
+      const avgB = getAverageRating(b);
+
+      return this.isSortByRatingAsc ? avgA - avgB : avgB - avgA;
+    });
+    this.isSortByRatingAsc = !this.isSortByRatingAsc;
   }
 }

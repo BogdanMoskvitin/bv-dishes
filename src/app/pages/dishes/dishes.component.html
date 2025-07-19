@@ -1,27 +1,80 @@
-<div class="container">
-    <button [routerLink]="['/dish']">Добавить блюдо</button>
+<div class="dishes">
+    <button class="dishes__btn_add" [routerLink]="['/dish']">Добавить блюдо</button>
 
-    <input type="text" (input)="filterList($event)" placeholder="Поиск...">
+    <div class="dishes__filters">
+        <input 
+            class="dishes__filters_search" 
+            type="text" 
+            (input)="filterList($event)" 
+            placeholder="Поиск..."
+        >
+        <button class="dishes__filters_sort" [matMenuTriggerFor]="menu">
+            <mat-icon>swap_vert</mat-icon>
+        </button>
 
-    <div class="dish" *ngFor="let dish of filteredDishes" [routerLink]="['/dish', dish.id]">
-        <div class="dish__name">{{ dish.name | truncate:25 }}</div>
-        <div class="dish__flex">
-            <div class="dish__place">{{ dish.place }}</div>
-            <div *ngIf="dish.b_rating && dish.v_rating && dish.b_rating !== dish.v_rating" class="dish__rating dish__rating_different"><span>{{ dish.b_rating }}</span>
-                <span>{{ dish.v_rating }}</span></div>
-            <div *ngIf="dish.b_rating && dish.v_rating && dish.b_rating === dish.v_rating" class="dish__rating dish__rating_same">
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item class="dishes__filters_sort_option" (click)="sortByDate()">
+                <mat-icon class="dishes__filters_sort_option_icon-date">date_range</mat-icon>
+                <span class="dishes__filters_sort_option_span">По дате</span>
+            </button>
+
+            <button mat-menu-item class="dishes__filters_sort_option" (click)="sortByRating()">
+                <mat-icon class="dishes__filters_sort_option_icon-rating">diamond</mat-icon>
+                <span class="dishes__filters_sort_option_span">По рейтингу</span>
+            </button>
+        </mat-menu>
+    </div>
+
+    <div 
+        class="dishes__dish" 
+        *ngFor="let dish of filteredDishes" 
+        [routerLink]="['/dish', dish.id]"
+    >
+        <div class="dishes__dish_header">
+            <div class="dishes__dish_header_name">{{ dish.name | truncate:25 }}</div>
+            <mat-icon 
+                class="dishes__dish_header_icon" 
+                *ngIf="dish.b_rating === 10 && dish.v_rating === 10">
+                diamond
+            </mat-icon>
+        </div>
+
+        <div class="dishes__dish_body">
+            <div>
+                <div class="dishes__dish_body_place">{{ dish.place }}</div>
+                <div class="dishes__dish_body_date">
+                    {{ dish.created_at | date:'dd.MM.yyyy' }}
+                </div>
+            </div>
+
+            <div 
+                *ngIf="dish.b_rating && dish.v_rating && dish.b_rating !== dish.v_rating" 
+                class="dishes__dish_body_rating dishes__dish_body_rating_different">
+                <span>{{ dish.b_rating }}</span>
+                <span>{{ dish.v_rating }}</span>
+            </div>
+
+            <div 
+                *ngIf="dish.b_rating && dish.v_rating && dish.b_rating === dish.v_rating" 
+                class="dishes__dish_body_rating dishes__dish_body_rating_same">
                 <span>{{ dish.b_rating }}</span>
             </div>
-            <div *ngIf="dish.b_rating && !dish.v_rating" class="dish__rating dish__rating_b">
+
+            <div 
+                *ngIf="dish.b_rating && !dish.v_rating" 
+                class="dishes__dish_body_rating dishes__dish_body_rating_b">
                 <span>{{ dish.b_rating }}</span>
             </div>
-            <div *ngIf="!dish.b_rating && dish.v_rating" class="dish__rating dish__rating_v">
+
+            <div 
+                *ngIf="!dish.b_rating && dish.v_rating" 
+                class="dishes__dish_body_rating dishes__dish_body_rating_v">
                 <span>{{ dish.v_rating }}</span>
             </div>
         </div>
     </div>
 
-    <div class="loader-container" *ngIf="isLoader">
+    <div class="dishes__loader" *ngIf="isLoader">
         <mat-spinner diameter="40" color="warn"></mat-spinner>
     </div>
 </div>
