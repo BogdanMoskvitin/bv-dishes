@@ -39,11 +39,12 @@ export class DishComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-  ) { }
+  ) {
+    this.user = this.userService.getUserName();
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.user = this.userService.getUserName();
 
     this.setValue();
   }

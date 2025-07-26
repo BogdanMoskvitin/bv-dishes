@@ -63,13 +63,15 @@
             <div 
                 *ngIf="dish.b_rating && !dish.v_rating" 
                 class="dishes__dish_body_rating dishes__dish_body_rating_b">
-                <span>{{ dish.b_rating }}</span>
+                <span *ngIf="user === 'Богдан'">{{ dish.b_rating }}</span>
+                <span *ngIf="user !== 'Богдан'">?</span>
             </div>
 
             <div 
                 *ngIf="!dish.b_rating && dish.v_rating" 
                 class="dishes__dish_body_rating dishes__dish_body_rating_v">
-                <span>{{ dish.v_rating }}</span>
+                <span *ngIf="user === 'Виктория'">{{ dish.v_rating }}</span>
+                <span *ngIf="user !== 'Виктория'">?</span>
             </div>
         </div>
     </div>

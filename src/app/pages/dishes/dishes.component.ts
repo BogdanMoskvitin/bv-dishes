@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { debounceTime, Subject } from 'rxjs';
 import { DishResponse } from 'src/app/models/dish.interface';
 import { DishesService } from 'src/app/services/dishes.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dishes',
@@ -16,8 +17,14 @@ export class DishesComponent implements OnInit {
   isLoader: boolean = false;
   isSortByDateAsc: boolean = true;
   isSortByRatingAsc: boolean = false;
+  user: string | null = null;
 
-  constructor(private dishesService: DishesService) { }
+  constructor(
+    private dishesService: DishesService,
+    private userService: UserService,
+  ) {
+    this.user = userService.getUserName();
+  }
 
   ngOnInit(): void {
     this.getDishes();
