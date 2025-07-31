@@ -18,6 +18,10 @@
         font-size: 16px;
     }
 
+    mat-form-field {
+        width: 100%;
+    }
+
     &__rating {
         display: flex;
         justify-content: space-between;

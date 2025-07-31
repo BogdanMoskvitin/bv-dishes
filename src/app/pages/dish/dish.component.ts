@@ -33,6 +33,7 @@ export class DishComponent implements OnInit {
   isPlanktonMem: boolean = false;
   errorMessage: string = '';
   isLoader: boolean = false;
+  date: Date | null = null;
 
   constructor(
     private dishesService: DishesService,
@@ -57,6 +58,7 @@ export class DishComponent implements OnInit {
         this.place = res.place;
         this.b_rating = res.b_rating;
         this.v_rating = res.v_rating;
+        this.date = new Date(res.created_at);
         this.isLoader = false;
       })
     }
@@ -70,6 +72,9 @@ export class DishComponent implements OnInit {
       place: this.place,
       rating: rating,
     };
+    if (this.date) {
+      dish.created_at = this.date.toISOString();
+    }
     this.dishesService.createDish(dish).subscribe(
       () => {
         this.router.navigate(['./dishes']);
@@ -87,6 +92,9 @@ export class DishComponent implements OnInit {
       place: this.place,
       rating: rating,
     };
+    if (this.date) {
+      dish.created_at = this.date.toISOString();
+    }
     this.dishesService.updateDish(+this.id, dish).subscribe(
       () => {
         this.router.navigate(['./dishes']);

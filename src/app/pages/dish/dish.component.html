@@ -4,6 +4,17 @@
         
         <input class="dish__input" type="text" [(ngModel)]="place" placeholder="Место">
 
+        <mat-form-field appearance="fill">
+            <mat-label>Дата</mat-label>
+            <input 
+                matInput 
+                [matDatepicker]="picker" 
+                placeholder="дд.мм.гггг" 
+                [(ngModel)]="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
         <div class="dish__rating">
             <button 
                 class="dish__rating_btn" 

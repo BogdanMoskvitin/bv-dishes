@@ -2,6 +2,7 @@ export interface DishRequest {
   name: string;
   place: string;
   rating: number;
+  created_at?: string;
 }
 
 export interface DishResponse {
