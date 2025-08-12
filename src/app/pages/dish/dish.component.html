@@ -20,10 +20,22 @@
                 class="dish__rating_btn" 
                 *ngFor="let btn of [].constructor(10); let i = index"
                 (click)="selectRating(i + 1)"
-                [class.dish__rating_selected_bv]="b_rating === v_rating && b_rating === i + 1"
-                [class.dish__rating_selected_b]="b_rating !== v_rating && b_rating === i + 1 && user === 'Богдан'"
-                [class.dish__rating_selected_v]="b_rating !== v_rating && v_rating === i + 1 && user === 'Виктория'">
-                {{i + 1}}
+                [class.dish__rating_selected_bv]="
+                    b_rating && v_rating &&
+                    b_rating === v_rating && b_rating === i + 1
+                "
+                [class.dish__rating_selected_b]="
+                    (user === 'Богдан' && b_rating && b_rating === i + 1 && 
+                    (!v_rating || b_rating !== v_rating)) ||
+                    (user === 'Виктория' && v_rating && v_rating === i + 1 && 
+                    (!b_rating || v_rating !== b_rating))
+                "
+                [class.dish__rating_selected_v]="
+                    (user === 'Богдан' && b_rating && v_rating && v_rating === i + 1 && 
+                    b_rating !== v_rating) ||
+                    (user === 'Виктория' && v_rating && b_rating && b_rating === i + 1 && v_rating !== b_rating)
+                ">
+                {{ i + 1 }}
             </button>
         </div>
         
