@@ -1,0 +1,79 @@
+<div class="places">
+    <app-nav></app-nav>
+
+    <button class="places__btn_add" [routerLink]="['/place']">Добавить место</button>
+
+    <div class="places__filters">
+        <input 
+            class="places__filters_search" 
+            type="text" 
+            (input)="filterList($event)" 
+            placeholder="Поиск..."
+        >
+        <button class="places__filters_sort" [matMenuTriggerFor]="menu">
+            <mat-icon>swap_vert</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item class="places__filters_sort_option" (click)="sortByDate()">
+                <mat-icon class="places__filters_sort_option_icon-date">date_range</mat-icon>
+                <span class="places__filters_sort_option_span">По дате</span>
+            </button>
+
+            <button mat-menu-item class="places__filters_sort_option" (click)="sortByRating()">
+                <mat-icon class="places__filters_sort_option_icon-rating">diamond</mat-icon>
+                <span class="places__filters_sort_option_span">По рейтингу</span>
+            </button>
+        </mat-menu>
+    </div>
+
+    <div 
+        class="places__place" 
+        *ngFor="let place of filteredPlaces" 
+        [routerLink]="['/place', place.id]"
+    >
+        <div class="places__place_header">
+            <div class="places__place_header_name">{{ place.name | truncate:25 }}</div>
+            <mat-icon 
+                class="places__place_header_icon" 
+                *ngIf="place.b_rating === 10 && place.v_rating === 10">
+                diamond
+            </mat-icon>
+        </div>
+
+        <div class="places__place_body">
+            <div class="places__place_body_place">{{ place.address }}</div>
+
+            <div 
+                *ngIf="place.b_rating && place.v_rating && place.b_rating !== place.v_rating" 
+                class="places__place_body_rating places__place_body_rating_different">
+                <span>{{ place.b_rating }}</span>
+                <span>{{ place.v_rating }}</span>
+            </div>
+
+            <div 
+                *ngIf="place.b_rating && place.v_rating && place.b_rating === place.v_rating" 
+                class="places__place_body_rating places__place_body_rating_same">
+                <span>{{ place.b_rating }}</span>
+            </div>
+
+            <div 
+                *ngIf="place.b_rating && !place.v_rating" 
+                class="places__place_body_rating places__place_body_rating_b">
+                <span *ngIf="user === 'Богдан'">{{ place.b_rating }}</span>
+                <span *ngIf="user !== 'Богдан'">?</span>
+            </div>
+
+            <div 
+                *ngIf="!place.b_rating && place.v_rating" 
+                class="places__place_body_rating places__place_body_rating_v">
+                <span *ngIf="user === 'Виктория'">{{ place.v_rating }}</span>
+                <span *ngIf="user !== 'Виктория'">?</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="places__loader" *ngIf="isLoader">
+        <mat-spinner diameter="40" color="warn"></mat-spinner>
+    </div>
+</div>

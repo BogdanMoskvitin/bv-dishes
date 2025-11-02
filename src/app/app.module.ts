@@ -18,6 +18,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_LOCALE  } from '@angular/material/core';
+import { PlacesComponent } from './pages/places/places.component';
+import { PlaceComponent } from './pages/place/place.component';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { MatNativeDateModule, MAT_DATE_LOCALE  } from '@angular/material/core';
     AuthComponent,
     DishesComponent,
     DishComponent,
-    TruncatePipe
+    TruncatePipe,
+    PlacesComponent,
+    PlaceComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

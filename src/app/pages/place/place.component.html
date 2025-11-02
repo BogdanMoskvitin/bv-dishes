@@ -1,0 +1,49 @@
+<div class="place">
+    <ng-container *ngIf="!isLoader || !id">
+        <input class="place__input" type="text" [(ngModel)]="name" placeholder="Название">
+        
+        <input class="place__input" type="text" [(ngModel)]="address" placeholder="Адрес">
+
+        <div class="place__rating">
+            <button 
+                class="place__rating_btn" 
+                *ngFor="let btn of [].constructor(10); let i = index"
+                (click)="selectRating(i + 1)"
+                [class.place__rating_selected_bv]="
+                    b_rating && v_rating &&
+                    b_rating === v_rating && b_rating === i + 1
+                "
+                [class.place__rating_selected_b]="
+                    b_rating && b_rating === i + 1 &&
+                    (user === 'Богдан' ||
+                    (user === 'Виктория' && v_rating))
+                "
+                [class.place__rating_selected_v]="
+                    v_rating && 
+                    v_rating === i + 1 &&
+                    (user === 'Виктория' ||
+                    (user === 'Богдан' && b_rating))
+                ">
+                {{ i + 1 }}
+            </button>
+        </div>
+        
+        <button class="place__btn" *ngIf="!id" (click)="createPlace()">Добавить место</button>
+        
+        <button class="place__btn" *ngIf="id" (click)="updatePlace()">Изменить место</button>
+        
+        <button class="place__btn" *ngIf="id" (click)="deletePlace()">Удалить место</button>
+    
+        <p class="place__error">{{ errorMessage }}</p>
+
+        <ng-container *ngFor="let audio of audioList">
+            <audio #audioRef [id]="audio.id" [src]="audio.src"></audio>
+        </ng-container>
+    </ng-container>
+
+    <div class="loader-container" *ngIf="isLoader">
+        <mat-spinner diameter="40" color="warn"></mat-spinner>
+    </div>
+</div>
+
+<button class="back" routerLink="">Назад</button>

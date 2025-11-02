@@ -4,6 +4,8 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { DishesComponent } from './pages/dishes/dishes.component';
 import { DishComponent } from './pages/dish/dish.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PlacesComponent } from './pages/places/places.component';
+import { PlaceComponent } from './pages/place/place.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dishes', pathMatch: 'full' },
@@ -11,6 +13,9 @@ const routes: Routes = [
   { path: 'dishes', component: DishesComponent, canActivate: [AuthGuard] },
   { path: 'dish', component: DishComponent, canActivate: [AuthGuard] },
   { path: 'dish/:id', component: DishComponent, canActivate: [AuthGuard] },
+  { path: 'places', component: PlacesComponent, canActivate: [AuthGuard] },
+  { path: 'place', component: PlaceComponent, canActivate: [AuthGuard] },
+  { path: 'place/:id', component: PlaceComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

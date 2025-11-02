@@ -1,0 +1,23 @@
+.nav {
+    &__container {
+        display: flex;
+        margin-bottom: 10px;
+        gap: 10px;
+        width: 100%;
+    }
+
+    &__link {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #fae0e4;
+        border-radius: 5px;
+        background: none;
+        box-sizing: border-box;
+        color: #FF477E;
+        font-size: 16px;
+
+        &-active {
+            border: 1px solid #FF477E;
+        }
+    }
+}
