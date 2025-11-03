@@ -1,6 +1,6 @@
 export interface DishRequest {
   name: string;
-  place: string;
+  place_id: number;
   rating: number;
   created_at?: string;
 }
@@ -10,7 +10,12 @@ export interface DishResponse {
   author: string;
   created_at: string;
   name: string;
-  place: string;
+  places: Place;
   b_rating: number;
   v_rating: number;
+}
+
+export interface Place {
+  id: number;
+  name: string;
 }

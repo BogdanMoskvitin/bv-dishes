@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DishRequest, DishResponse } from 'src/app/models/dish.interface';
+import { PlaceResponse } from 'src/app/models/place.interface';
 import { DishesService } from 'src/app/services/dishes.service';
+import { PlacesService } from 'src/app/services/places.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -27,19 +29,21 @@ export class DishComponent implements OnInit {
   id: string | null = null;
   user: string | null = null;
   name: string = '';
-  place: string = '';
+  place: number | null = null;
   b_rating: number | null = null;
   v_rating: number | null = null;
   isPlanktonMem: boolean = false;
   errorMessage: string = '';
   isLoader: boolean = false;
   date: Date | null = null;
+  places: PlaceResponse[] = [];
 
   constructor(
     private dishesService: DishesService,
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
+    private placesService: PlacesService
   ) {
     this.user = this.userService.getUserName();
   }
@@ -47,7 +51,16 @@ export class DishComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
 
+    this.getPlaces();
     this.setValue();
+  }
+
+  getPlaces() {
+    this.isLoader = true;
+    this.placesService.getPlaces().subscribe((data: PlaceResponse[]) => {
+      this.places = data;
+      this.isLoader = false;
+    });
   }
 
   setValue() {
@@ -55,7 +68,7 @@ export class DishComponent implements OnInit {
       this.isLoader = true;  
       this.dishesService.getDish(+this.id).subscribe((res: DishResponse) => {
         this.name = res.name;
-        this.place = res.place;
+        this.place = res.places?.id;
         this.b_rating = res.b_rating;
         this.v_rating = res.v_rating;
         this.date = new Date(res.created_at);
@@ -66,10 +79,10 @@ export class DishComponent implements OnInit {
 
   createDish() {
     let rating = this.user === 'Богдан' ? this.b_rating : this.v_rating;
-    if (!rating || !this.name.length) return;
+    if (!rating || !this.name.length || !this.place) return;
     const dish: DishRequest = {
       name: this.name,
-      place: this.place,
+      place_id: this.place,
       rating: rating,
     };
     if (this.date) {
@@ -86,10 +99,10 @@ export class DishComponent implements OnInit {
 
   updateDish() {
     let rating = this.user === 'Богдан' ? this.b_rating : this.v_rating;
-    if (!this.id || !rating || !this.name.length) return;
+    if (!this.id || !rating || !this.name.length || !this.place) return;
     const dish: DishRequest = {
       name: this.name,
-      place: this.place,
+      place_id: this.place,
       rating: rating,
     };
     if (this.date) {

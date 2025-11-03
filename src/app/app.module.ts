@@ -21,6 +21,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE  } from '@angular/material/core';
 import { PlacesComponent } from './pages/places/places.component';
 import { PlaceComponent } from './pages/place/place.component';
 import { NavComponent } from './components/nav/nav.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { NavComponent } from './components/nav/nav.component';
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,8 +1,15 @@
 <div class="dish">
     <ng-container *ngIf="!isLoader || !id">
         <input class="dish__input" type="text" [(ngModel)]="name" placeholder="Название">
-        
-        <input class="dish__input" type="text" [(ngModel)]="place" placeholder="Место">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Место</mat-label>
+            <mat-select [(ngModel)]="place">
+                <mat-option *ngFor="let place of places" [value]="place.id">
+                    {{place.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Дата</mat-label>

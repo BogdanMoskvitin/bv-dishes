@@ -60,7 +60,7 @@ export class DishesComponent implements OnInit {
 
     this.filteredDishes = this.dishes.filter(dish =>
       dish.name.toLowerCase().includes(lowerValue) ||
-      dish.place.toLowerCase().includes(lowerValue)
+      dish.places.name.toLowerCase().includes(lowerValue)
     );
   }
 

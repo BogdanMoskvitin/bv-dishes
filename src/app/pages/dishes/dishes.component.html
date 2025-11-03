@@ -43,7 +43,12 @@
 
         <div class="dishes__dish_body">
             <div>
-                <div class="dishes__dish_body_place">{{ dish.place }}</div>
+                <a 
+                    class="dishes__dish_body_place"
+                    [routerLink]="['/place', dish.places?.id]"
+                    (click)="$event.stopPropagation()">
+                    {{ dish.places?.name }}
+                </a>
                 <div class="dishes__dish_body_date">
                     {{ dish.created_at | date:'dd.MM.yyyy' }}
                 </div>
